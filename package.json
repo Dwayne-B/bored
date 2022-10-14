@@ -1,0 +1,24 @@
+{
+  "name": "bored",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "parcel build",
+    "start": "parcel index.html"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.1.2",
+    "postcss-preset-env": "^7.8.2"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10"
+  }
+}
