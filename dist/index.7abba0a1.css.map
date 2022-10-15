@@ -1,1 +1,1 @@
-{"mappings":"AAAA","sources":["css/main.scss"],"sourcesContent":["body {\r\n  background-color: brown;\r\n}"],"names":[],"version":3,"file":"index.7abba0a1.css.map","sourceRoot":"/__parcel_source_root/"}
+{"mappings":"AAAA;;;;AAIA","sources":["css/main.scss"],"sourcesContent":["body {\r\n  background-color: #333;\r\n}\r\n\r\n.cap-btn {\r\n\r\n  text-transform: capitalize;\r\n}"],"names":[],"version":3,"file":"index.7abba0a1.css.map","sourceRoot":"/__parcel_source_root/"}
