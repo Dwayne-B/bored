@@ -1,7 +1,8 @@
 
+const $categorySection = $('#category-section');
 
-const $btns = $('#category-section input');
-const $range = $('#activity-section .range')
+
+const $activityRange = $('#effort-section .range')
 
 const $submitBtn = $('#submit-btn');
 const $outputArea = $('#outputArea')
@@ -11,16 +12,19 @@ var outPut;
 // PARAMS
 let type;
 // range 0.0 - 1.0
-let accessibility;
-// .8 being most expensive
-let minPrice;
-let maxPrice;
+let accessibility = $activityRange.val();
+const categories = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
+
+
+categories.forEach(category => $categorySection.append(` <input id=" ${category}Btn" class="cap-btn" type="button" value="${category}">`))
+const $categorySectionBtns = $('.cap-btn');
 // handlers
-$btns.on("click", (e) => {
+$categorySectionBtns.on("click", (e) => {
   e.preventDefault();
 
   // switch for the category buttons
   //this will change the value on click
+
   switch (e.target.value) {
     case "education":
       // LOGIC HERE
@@ -48,12 +52,16 @@ $btns.on("click", (e) => {
       type = e.target.value;
       break;
     default:
+      type = e.target.value;
       break;
   }
+  console.log(type);
+
 
 })
-const setRange = () => {
-  console.log($range.val());
+const setActivityRange = () => {
+  accessibility = $activityRange.val()
+  console.log($activityRange.val());
 }
 
 
@@ -63,15 +71,18 @@ $submitBtn.on('click', (e) => {
   if (type === undefined) {
     console.log('EROROROROR')
   } else {
+    setActivityRange();
     getData()
-    setRange()
   }
 
 })
 
-
 const getData = async () => {
-  const url = `https://www.boredapi.com/api/activity?type=${type}&accessibility=${accessibility}&minprice=${minPrice}&maxprice=${maxPrice}`;
+
+  clearOutputArea();
+
+  const url = `https://www.boredapi.com/api/activity?type=${type}&accessibility=${accessibility}`;
+
   console.log(url);
   await axios.get(url)
     .then(res => {
@@ -87,13 +98,14 @@ const getData = async () => {
 const appendOutPut = (outPut) => {
   console.log(outPut);
   if (!outPut.error) {
-    $outputArea.append(`${outPut.activity}  ${outPut.type}`)
+    $outputArea.append(`<p>${outPut.activity}  "TYPE" ${outPut.type}</p>`)
   } else {
     $outputArea.append(`${outPut.error} `)
   }
 
-
-
+}
+const clearOutputArea = () => {
+  $outputArea.children().remove()
 }
 
 
