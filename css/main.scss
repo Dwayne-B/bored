@@ -1,1 +1,18 @@
 @forward "./index";
+
+@use "./util/index" as u;
+
+
+
+
+#outputArea {
+  background-color: var(--primary-text-color);
+  height: 100%;
+  padding: u.toRem(15);
+}
+
+// states
+
+.category-btn-clicked {
+  background-color: #daa12e;
+}

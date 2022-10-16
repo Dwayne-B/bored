@@ -2,6 +2,7 @@
 const $categorySection = $('#category-section');
 
 
+
 const $activityRange = $('#effort-section .range')
 
 const $submitBtn = $('#submit-btn');
@@ -15,8 +16,9 @@ let type;
 let accessibility = $activityRange.val();
 const categories = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 
-
-categories.forEach(category => $categorySection.append(` <input id=" ${category}Btn" class="cap-btn" type="button" value="${category}">`))
+// create the category buttons
+categories.forEach(category => $categorySection.append(` <input id=" ${category}Btn" class="btn cap-btn" type="button" value="${category}">`))
+// get the newly created buttons via jquery
 const $categorySectionBtns = $('.cap-btn');
 // handlers
 $categorySectionBtns.on("click", (e) => {
@@ -68,18 +70,40 @@ const setActivityRange = () => {
 // submit button handles sending of request 
 $submitBtn.on('click', (e) => {
   e.preventDefault();
+
   if (type === undefined) {
+    clearOutputArea();
     console.log('EROROROROR')
   } else {
+    clearOutputArea();
     setActivityRange();
     getData()
   }
 
 })
 
+$categorySectionBtns.on('click', (e) => {
+  e.preventDefault();
+
+  if ($(e.target).hasClass('category-btn-clicked')) {
+
+    $(e.target).removeClass('category-btn-clicked')
+
+
+  } else {
+    $(".category-btn-clicked").removeClass("category-btn-clicked")
+    $(e.target).addClass('category-btn-clicked')
+
+
+  }
+
+
+})
+
+
 const getData = async () => {
 
-  clearOutputArea();
+
 
   const url = `https://www.boredapi.com/api/activity?type=${type}&accessibility=${accessibility}`;
 
@@ -98,14 +122,14 @@ const getData = async () => {
 const appendOutPut = (outPut) => {
   console.log(outPut);
   if (!outPut.error) {
-    $outputArea.append(`<p>${outPut.activity}  "TYPE" ${outPut.type}</p>`)
+    $outputArea.append(`<p>${outPut.activity}  </p>`)
   } else {
     $outputArea.append(`${outPut.error} `)
   }
 
 }
 const clearOutputArea = () => {
-  $outputArea.children().remove()
+  $outputArea.empty();
 }
 
 
